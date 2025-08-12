@@ -43,15 +43,26 @@ app.post('/parking-event', async (req, res) => {
     statusS02,
     statusS02Weight,
     statusS03,
-    statusS03Weight
+    statusS03Weight,
+    snapshot1Url,
+    snapshot2Url,
+    snapshot3Url,
+    snapshotAiUrl,
+    statusAccuracyPercent,
+    statusS01AccuracyPercent,
+    statusS02AccuracyPercent,
+    statusS03AccuracyPercent
   } = req.body;
 
   try {
     const result = await pool.query(
       `INSERT INTO "parkingLotEventsNV1"
       ("lotId", "sensorId", status, "statusWeight", "statusS01", "statusS01Weight",
-       "statusS02", "statusS02Weight", "statusS03", "statusS03Weight")
-       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)
+       "statusS02", "statusS02Weight", "statusS03", "statusS03Weight",
+       "snapshot1Url", "snapshot2Url", "snapshot3Url", "snapshotAiUrl",
+       "statusAccuracyPercent", "statusS01AccuracyPercent", "statusS02AccuracyPercent", "statusS03AccuracyPercent")
+       VALUES
+       ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18)
        RETURNING *`,
       [
         lotId,
@@ -63,7 +74,15 @@ app.post('/parking-event', async (req, res) => {
         statusS02,
         statusS02Weight,
         statusS03,
-        statusS03Weight
+        statusS03Weight,
+        snapshot1Url,
+        snapshot2Url,
+        snapshot3Url,
+        snapshotAiUrl,
+        statusAccuracyPercent,
+        statusS01AccuracyPercent,
+        statusS02AccuracyPercent,
+        statusS03AccuracyPercent
       ]
     );
 
